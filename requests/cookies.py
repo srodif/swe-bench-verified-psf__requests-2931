@@ -8,6 +8,11 @@ requests.utils imports from here, so be careful with imports.
 
 import copy
 import time
+try:
+    from collections.abc import MutableMapping
+except ImportError:
+    # Python < 3.3
+    from collections import MutableMapping
 import collections
 from .compat import cookielib, urlparse, urlunparse, Morsel
 
@@ -160,7 +165,7 @@ class CookieConflictError(RuntimeError):
     Use .get and .set and include domain and path args in order to be more specific."""
 
 
-class RequestsCookieJar(cookielib.CookieJar, collections.MutableMapping):
+class RequestsCookieJar(cookielib.CookieJar, MutableMapping):
     """Compatibility class; is a cookielib.CookieJar, but exposes a dict
     interface.
 

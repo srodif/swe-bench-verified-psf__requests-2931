@@ -8,15 +8,20 @@ Data structures that power Requests.
 
 """
 
+try:
+    from collections.abc import MutableMapping
+except ImportError:
+    # Python < 3.3
+    from collections import MutableMapping
 import collections
 
 
-class CaseInsensitiveDict(collections.MutableMapping):
+class CaseInsensitiveDict(MutableMapping):
     """
     A case-insensitive ``dict``-like object.
 
     Implements all methods and operations of
-    ``collections.MutableMapping`` as well as dict's ``copy``. Also
+    ``MutableMapping`` as well as dict's ``copy``. Also
     provides ``lower_items``.
 
     All keys are expected to be strings. The structure remembers the
@@ -71,7 +76,7 @@ class CaseInsensitiveDict(collections.MutableMapping):
         )
 
     def __eq__(self, other):
-        if isinstance(other, collections.Mapping):
+        if isinstance(other, MutableMapping):
             other = CaseInsensitiveDict(other)
         else:
             return NotImplemented
