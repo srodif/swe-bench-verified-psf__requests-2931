@@ -11,7 +11,7 @@ import time
 try:
     from collections.abc import MutableMapping
 except ImportError:
-    # Python < 3.3
+    # Python < 3.3 #bump analysis
     from collections import MutableMapping
 import collections
 from .compat import cookielib, urlparse, urlunparse, Morsel
